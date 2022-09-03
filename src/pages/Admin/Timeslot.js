@@ -1,5 +1,5 @@
 import React from "react";
-
+import axios from "axios";
 export default function Timeslot() {
-  return <div>time slot</div>;
+  return <div>Timeslot</div>;
 }

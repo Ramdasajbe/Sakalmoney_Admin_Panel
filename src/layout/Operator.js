@@ -201,11 +201,25 @@ import AssignmentRoundedIcon from "@mui/icons-material/AssignmentRounded";
 import ListAltRoundedIcon from "@mui/icons-material/ListAltRounded";
 import HowToRegRoundedIcon from "@mui/icons-material/HowToRegRounded";
 import PersonAddRoundedIcon from "@mui/icons-material/PersonAddRounded";
+import { makeStyles } from "@material-ui/styles";
+import { hover } from "@testing-library/user-event/dist/hover";
 const drawerWidth = 240;
 const upperList = [
-  { icon: <HomeIcon />, title: "Home", url: "/admin/dashboard" },
-  { icon: <Agriculture />, title: "Add Farm", url: "/admin/add-farm" },
-  { icon: <Time />, title: "Time Slot", url: "/admin/time-slot" },
+  {
+    icon: <HomeIcon />,
+    title: "Home",
+    url: "/admin/dashboard",
+  },
+  {
+    icon: <Agriculture />,
+    title: "Add Farm",
+    url: "/admin/add-farm",
+  },
+  {
+    icon: <Time />,
+    title: "Time Slot",
+    url: "/admin/time-slot",
+  },
   {
     icon: <PersonAddRoundedIcon />,
     title: "Add Sub Admin",
@@ -243,19 +257,8 @@ const upperList = [
   },
 ];
 
-const lowerList = [
-  {
-    icon: <DirectionsCarRoundedIcon />,
-    title: "Driver CheckIN-OUT List",
-    url: "/admin/checkInOutlist",
-  },
-  {
-    icon: <LocationCityRoundedIcon />,
-    title: "Reports",
-    url: "/admin/reports",
-  },
-];
 function Operator(props) {
+  const classes = useStyles();
   const navigate = useNavigate();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -268,13 +271,29 @@ function Operator(props) {
     <div>
       <Toolbar />
       <Divider />
-      <List>
+      <List
+        sx={{
+          backgroundColor: "#E1FFEE",
+          color: "black",
+          fontSize: "80px",
+        }}
+      >
         {upperList.map((item, index) => (
-          <ListItem button key={item.title} onClick={() => navigate(item.url)}>
-            <ListItemButton>
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.title} />
-            </ListItemButton>
+          <ListItem
+            button
+            key={item.title}
+            onClick={() => navigate(item.url)}
+            sx={{}}
+          >
+            <div className={classes.back}>
+              <ListItemButton>
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText
+                  sx={{ marginLeft: "-20px" }}
+                  primary={item.title}
+                />
+              </ListItemButton>
+            </div>
           </ListItem>
         ))}
       </List>
@@ -291,8 +310,10 @@ function Operator(props) {
       <AppBar
         position="fixed"
         sx={{
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
+          width: { sm: `calc(100% -0px)` },
           ml: { sm: `${drawerWidth}px` },
+          backgroundColor: "#3A3845",
+          zIndex: 100000,
         }}
       >
         <Toolbar>
@@ -306,7 +327,7 @@ function Operator(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Responsive drawer
+            SAKAL MONEY
           </Typography>
         </Toolbar>
       </AppBar>
@@ -341,6 +362,9 @@ function Operator(props) {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
+              "::-webkit-scrollbar": {
+                display: "none",
+              },
             },
           }}
           open
@@ -372,5 +396,16 @@ Operator.propTypes = {
    */
   window: PropTypes.func,
 };
+const useStyles = makeStyles((theme) => ({
+  back: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "240px",
+    minHeight: "70px",
 
+    borderBottomLeftRadius: "30px",
+    borderTopLeftRadius: "30px",
+  },
+}));
 export default Operator;
