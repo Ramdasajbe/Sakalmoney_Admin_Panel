@@ -312,6 +312,7 @@ function Admin(props) {
           width: { sm: `calc(100% -0px)` },
           ml: { sm: `${drawerWidth}px` },
           backgroundColor: "#3A3845",
+
           zIndex: 100000,
         }}
       >
